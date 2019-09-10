@@ -39,20 +39,36 @@ int main(void){
     //immitatintg hash key feature by creating an array of alphabets
     
     int arr[26]={0};
-    printf("%d",arr[25]);
-    
-    //creating key matrix
-    char keymat[5][5];
-    int j,m=0;
-    for(i=0;i<5;i++){
-        for(j=0;j<5;j++){
-            if(m!=strlen(modst)){   //following this untill the length of modified text
-                if(arr[97-modst[m]]!=0)
-                    keymat[i][j]=modst[m];
-                
-            }            
-        }
-    }
-    
+
+	char c='a';  // this is for iterating through the characters
+	char keymat[5][5];
+	int j,m=0; // m is traversing through the string
+	for(i=0;i<5;i++){
+		for(j=0;j<5;){
+			if(m!=strlen(key)){
+
+				while(arr[(int)key[m]-97]!=0)
+					m++;
+				arr[(int)key[m]-97]=1;
+				keymat[i][j++]=key[m++];
+			}
+			else{
+					while(arr[(int)c-97]!=0){
+						c=(char)((int)c+1);
+					}
+					arr[(int)c-97]=1;
+					keymat[i][j++]=c;
+					c=(char)((int)c+1);
+			}
+		}
+	}
+	printf("\n");
+	for(i=0;i<5;i++){
+		for(j=0;j<5;j++){
+			printf("%c",keymat[i][j]);
+		}
+		printf("\n");
+	}
+
     return 0;
 }
