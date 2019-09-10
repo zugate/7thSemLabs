@@ -62,13 +62,14 @@ int main(void){
 			}
 		}
 	}
-	printf("\n");
-	for(i=0;i<5;i++){
-		for(j=0;j<5;j++){
-			printf("%c",keymat[i][j]);
-		}
-		printf("\n");
-	}
-
+	//print ing the key matrix
+	// printf("\n");
+	// for(i=0;i<5;i++){
+	// 	for(j=0;j<5;j++){
+	// 		printf("%c",keymat[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
+	
     return 0;
 }

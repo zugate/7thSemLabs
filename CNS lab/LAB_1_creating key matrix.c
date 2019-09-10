@@ -19,13 +19,8 @@ int main(void){
 		for(j=0;j<5;){
 			if(m!=strlen(key)){
 
-				while(arr[(int)key[m]-97]!=0){
+				while(arr[(int)key[m]-97]!=0)
 					m++;
-				}
-				if(key[m]=='i'||key[m]=='j'){
-							arr[(int)'i'-97]=1;
-							arr[(int)'j'-97]=1;
-						}
 				arr[(int)key[m]-97]=1;
 				keymat[i][j++]=key[m++];
 			}
@@ -33,10 +28,6 @@ int main(void){
 					while(arr[(int)c-97]!=0){
 						c=(char)((int)c+1);
 					}
-					if(c=='i'||c=='j'){
-							arr[(int)'i'-97]=1;
-							arr[(int)'j'-97]=1;
-						}
 					arr[(int)c-97]=1;
 					keymat[i][j++]=c;
 					c=(char)((int)c+1);
@@ -46,7 +37,7 @@ int main(void){
 	printf("\n");
 	for(i=0;i<5;i++){
 		for(j=0;j<5;j++){
-			printf("%c ",keymat[i][j]);
+			printf("%c",keymat[i][j]);
 		}
 		printf("\n");
 	}
