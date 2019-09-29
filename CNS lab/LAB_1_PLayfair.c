@@ -2,14 +2,19 @@
 #include<stdlib.h>
 #include<string.h>
 
+struct position
+{
+	int row;
+	int col;
+};
+
 int main(void){
 	char st[50];   //assuming the maximum size of the plain text to not exceed 50
 	printf("Enter the Plain text : ");
-	scanf("%s[^ ]",st);
+	scanf("%s[^ ,\n]",st);
 	
 	int l=strlen(st); //length of the plain text
 	//modifying the plain text and creating digraph
-
 	char modst[50];
 	int i,k=0;
 	for(i=0;i<(l-1);i++)
@@ -25,16 +30,18 @@ int main(void){
 		}
 	}
 	modst[k]=st[i];        // adds the last character of the string to the modified text
-	printf("%s\n",modst);  //prints the modified string
     
     //if the modified string is not even
-    
+    	//add another x as filler at last
     if(strlen(modst)%2!=0)
         modst[k+1]='x';
 
+    printf("%s\n",modst);  //prints the modified string
+    printf("%d\n",strlen(modst) );
+
     char key[26];
     printf("Enter the key : ");
-    scanf("%s[^ ]",key);
+    scanf("%s[^ ,\n]",key);
     
     //immitatintg hash key feature by creating an array of alphabets
     
@@ -79,5 +86,60 @@ int main(void){
 		printf("\n");
 	}
 	
+	//Encrpting 
+	// firstly hash mapping the array again that are present in the modified text
+
+	int arrMod[26]={0};
+	int l2=strlen(modst);
+	for(i=0;i<l2;i++)
+		{ 
+			if(arrMod[(int)modst[i]-97]==0)
+				arrMod[(int)modst[i]-97]=1;
+		}
+	//structure array for storing positions
+
+	struct position p[l2];
+
+	 //will iterate through the position p
+	
+	//tracking position of every character and storing in p
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5;j++){
+			if(arrMod[(int)(keymat[i][j])-97]==1)
+			{
+				p[(int)(keymat[i][j])-97].row=i;
+				p[(int)(keymat[i][j])-97].col=j;
+			}
+		}
+	}
+
+	// for(i=0;i<k;i++){
+	// 	printf("%d %d\n",p[i].row,p[i].col );
+	// }
+
+	char EncMod[l2];
+
+	// now going through the p and replacing the characters using condition 
+		//listed in breaking down playfair
+
+	for(i=0;i<l2-1;i+=2){
+		if(p[(int)modst[i]-97].row==p[(int)modst[i+1]-97].row){    //if the letter pair is in the same row
+			
+			EncMod[i]=keymat[p[(int)modst[i]-97].row][((int)p[(int)modst[i]-97].col+1)%5];
+			EncMod[i+1]=keymat[p[(int)modst[i+1]-97].row][(p[(int)modst[i+1]-97].col+1)%5];
+		}
+		else if(p[(int)modst[i]-97].col==p[(int)modst[i+1]-97].col){    //if the letter pair is in the same column
+			EncMod[i]=keymat[(p[(int)modst[i]-97].row+1)%5][p[(int)modst[i]-97].col];
+			EncMod[i+1]=keymat[(p[(int)modst[i+1]-97].row+1)%5][p[(int)modst[i+1]-97].col];
+		}
+		else {                         //if the letter p[air is neither in the same row or column
+			EncMod[i]=keymat[p[(int)modst[i]-97].row][p[(int)modst[i+1]-97].col];
+			EncMod[i+1]=keymat[p[(int)modst[i+1]-97].row][p[(int)modst[i]-97].col];
+		}
+	}
+
+	printf("%s\n",EncMod);  
+	printf("%d\n",strlen(EncMod) );
     return 0;
 }

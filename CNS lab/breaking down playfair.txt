@@ -1,0 +1,26 @@
+1. modify the given text and form digraph
+2. form a key matrix
+3. encrpting
+		a. taking every pair and getting the
+			 location in key matrix 
+		b. if the pair is in the same row move 
+			 clockwise one step and replace
+	    c. if pair is in same column rotate 
+	    	downward to replace by that character
+	    d. if in different row and column
+	    		select the character that lies in
+	    		the same row but in column of the 
+	    		pair partner.
+4. decrypting
+		a. taking every pair and getting the
+			 location in key matrix 
+		b. if the pair is in the same row move 
+			 anti clockwise one step and replace
+	    c. if pair is in same column rotate 
+	    	upward to replace by that character
+	    d. if in different row and column
+	    		select the character that lies in
+	    		the same row but in column of the 
+	    		pair partner.
+	    		
+5. thats all bitches!!
