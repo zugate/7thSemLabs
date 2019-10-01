@@ -1,5 +1,6 @@
 1. modify the given text and form digraph
 2. form a key matrix
+2.5 hash-mapping the modified text so that the position can be determined 
 3. encrpting
 		a. taking every pair and getting the
 			 location in key matrix 
@@ -22,5 +23,5 @@
 	    		select the character that lies in
 	    		the same row but in column of the 
 	    		pair partner.
-	    		
+
 5. thats all bitches!!

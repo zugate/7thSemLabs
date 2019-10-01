@@ -141,5 +141,59 @@ int main(void){
 
 	printf("%s\n",EncMod);  
 	printf("%d\n",strlen(EncMod) );
+
+	//going throught the last and final step of decription
+
+	int arrMod2[26]={0};
+	int l3=strlen(EncMod);
+	for(i=0;i<l3;i++)
+		{ 
+			if(arrMod2[(int)EncMod[i]-97]==0)
+				arrMod2[(int)EncMod[i]-97]=1;
+		}
+	//structure array for storing positions
+
+	struct position p2[l2];
+
+	 //will iterate through the position p2
+	
+	//tracking position of every character and storing in p2
+	for(i=0;i<5;i++)
+	{
+		for(j=0;j<5;j++){
+			if(arrMod2[(int)(keymat[i][j])-97]==1)
+			{
+				p2[(int)(keymat[i][j])-97].row=i;
+				p2[(int)(keymat[i][j])-97].col=j;
+			}
+		}
+	}
+
+	char DecMod[l2];
+
+	for(i=0;i<l2-1;i+=2){
+		if(p2[(int)EncMod[i]-97].row==p2[(int)EncMod[i+1]-97].row)  //if in the same row
+		{    
+
+			DecMod[i]=keymat[p2[(int)EncMod[i]-97].row][((int)p2[(int)EncMod[i]-97].col+4)%5];
+			DecMod[i+1]=keymat[p2[(int)EncMod[i+1]-97].row][(p2[(int)EncMod[i+1]-97].col+4)%5];
+		}
+		else if(p2[(int)EncMod[i]-97].col==p2[(int)EncMod[i+1]-97].col)
+		{
+
+			DecMod[i]=keymat[(p2[(int)EncMod[i]-97].row+4)%5][p2[(int)EncMod[i]-97].col];
+			DecMod[i+1]=keymat[(p2[(int)EncMod[i+1]-97].row+4)%5][p2[(int)EncMod[i+1]-97].col];
+		}
+		else //neither in same row nor in same column
+		{
+
+			DecMod[i]=keymat[p2[(int)EncMod[i]-97].row][p2[(int)EncMod[i+1]-97].col];
+
+			DecMod[i+1]=keymat[p2[(int)EncMod[i+1]-97].row][p2[(int)EncMod[i]-97].col];
+		}
+	}
+
+	printf("\n%s\n",DecMod );
+
     return 0;
 }
